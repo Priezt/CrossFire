@@ -1,5 +1,11 @@
 package me.priezt.crossfire;
 
-public class GameView {
+import com.badlogic.gdx.InputProcessor;
+
+public abstract class GameView{
+	public abstract void draw(Drawing drawing);
 	
+	public void touchDragged(float x, float y, float originX, float originY){
+		
+	}
 }
