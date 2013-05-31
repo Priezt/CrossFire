@@ -46,6 +46,12 @@ public class CrossFireGame implements ApplicationListener {
 		currentGameView = new BattleGameView(battleground);
 		battleground.putUnit(new Turret(50f, 50f, 90f, Unit.Team.RED));
 		battleground.putUnit(new Turret(100f, 100f, 0, Unit.Team.BLUE));
+		GroundMatrix gm = new GroundMatrix(Conf.screenWidth, Conf.screenHeight);
+		gm.add("a", 100f, 100f, 10f);
+		gm.add("b", 120f, 120f, 10f);
+		for(Object obj : gm.getObjectsInRange(200f, 200f, 20f)){
+			Tool.info("in range: " + obj);
+		}
 	}
 	
 	private void initInputProcessor(){
@@ -83,7 +89,7 @@ public class CrossFireGame implements ApplicationListener {
 			@Override
 			public boolean touchDown(int screenX, int screenY, int pointer,
 					int button) {
-				Tool.info("touchup: " + pointer + " : (" + screenX + "," + screenY + ")");
+//				Tool.info("touchup: " + pointer + " : (" + screenX + "," + screenY + ")");
 				touchPoints[pointer] = new Point(screenX, Conf.screenHeight - screenY);
 				return false;
 			}
@@ -91,14 +97,24 @@ public class CrossFireGame implements ApplicationListener {
 			@Override
 			public boolean touchUp(int screenX, int screenY, int pointer,
 					int button) {
-				Tool.info("touchdown: " + pointer + " : (" + screenX + "," + screenY + ")");
+//				Tool.info("touchdown: " + pointer + " : (" + screenX + "," + screenY + ")");
+				CrossFireGame.this.currentGameView.touchUp(
+						screenX,
+						Conf.screenHeight - screenY,
+						touchPoints[pointer].x,
+						touchPoints[pointer].y);
 				touchPoints[pointer] = null;
 				return false;
 			}
 
 			@Override
 			public boolean touchDragged(int screenX, int screenY, int pointer) {
-				Tool.info("touchdragged: " + pointer + " : (" + screenX + "," + screenY + ")");
+//				Tool.info("touchdragged: " + pointer + " : (" + screenX + "," + screenY + ")");
+				CrossFireGame.this.currentGameView.touchDragged(
+						screenX,
+						Conf.screenHeight - screenY,
+						touchPoints[pointer].x,
+						touchPoints[pointer].y);
 				return false;
 			}
 

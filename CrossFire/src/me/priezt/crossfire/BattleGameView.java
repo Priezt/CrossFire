@@ -13,4 +13,14 @@ public class BattleGameView extends GameView {
 			unit.draw(drawing);
 		}
 	}
+	
+	@Override
+	public void touchDragged(float x, float y, float originX, float originY){
+		Tool.info("Drag: (" + (x - originX) + "," + (y - originY) + ")");
+	}
+	
+	@Override
+	public void touchUp(float x, float y, float originX, float originY){
+		Tool.info("Click: (" + originX + "," + originY + ") -> (" + x + "," + y + ")");
+	}
 }

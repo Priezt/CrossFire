@@ -16,4 +16,8 @@ public class Battleground {
 	public void purgeUnit(Unit unit){
 		units.remove(unit);
 	}
+	
+	public Unit getUnitAtPoint(float x, float y){
+		throw new UnsupportedOperationException();
+	}
 }
