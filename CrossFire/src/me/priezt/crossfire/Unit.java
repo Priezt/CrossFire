@@ -18,6 +18,13 @@ public abstract class Unit {
 		angle = _angle;
 	}
 	
+	public boolean containsPoint(float px, float py){
+		if(Math.abs(px - x) > radius) return false; 
+		if(Math.abs(py - y) > radius) return false;
+		if(Math.pow(px - x, 2) + Math.pow(py - y, 2) > Math.pow(radius, 2)) return false;
+		return true;
+	}
+	
 	public static Color getTeamColor(Team t){
 		if(t.equals(Team.RED)){
 			return Color.RED;

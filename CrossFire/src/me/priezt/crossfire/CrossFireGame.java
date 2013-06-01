@@ -44,14 +44,8 @@ public class CrossFireGame implements ApplicationListener {
 	private void initTestStuff(){
 		battleground = new Battleground();
 		currentGameView = new BattleGameView(battleground);
-		battleground.putUnit(new Turret(50f, 50f, 90f, Unit.Team.RED));
-		battleground.putUnit(new Turret(100f, 100f, 0, Unit.Team.BLUE));
-		GroundMatrix gm = new GroundMatrix(Conf.screenWidth, Conf.screenHeight);
-		gm.add("a", 100f, 100f, 10f);
-		gm.add("b", 120f, 120f, 10f);
-		for(Object obj : gm.getObjectsInRange(200f, 200f, 20f)){
-			Tool.info("in range: " + obj);
-		}
+		battleground.addUnit(new Turret(250f, 150f, 90f, Unit.Team.RED));
+		battleground.addUnit(new Turret(400f, 800f, 0, Unit.Team.BLUE));
 	}
 	
 	private void initInputProcessor(){

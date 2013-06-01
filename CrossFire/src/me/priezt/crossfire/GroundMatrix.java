@@ -50,7 +50,7 @@ public class GroundMatrix {
 		int maxX = getMaxX(x, y, radius);
 		int minY = getMinY(x, y, radius);
 		int maxY = getMaxY(x, y, radius);
-		Tool.info("add object in [" + minX + "][" + minY + "], [" + maxX + "][" + maxY + "] : " + obj);
+//		Tool.info("add object in [" + minX + "][" + minY + "], [" + maxX + "][" + maxY + "] : " + obj);
 		for(int i=minX; i<=maxX; i++){
 			for(int j=minY; j<=maxY; j++){
 				matrix[i][j].add(obj);
@@ -63,7 +63,7 @@ public class GroundMatrix {
 		int maxX = getMaxX(x, y, radius);
 		int minY = getMinY(x, y, radius);
 		int maxY = getMaxY(x, y, radius);
-		Tool.info("remove object from [" + minX + "][" + minY + "], [" + maxX + "][" + maxY + "] : " + obj);
+//		Tool.info("remove object from [" + minX + "][" + minY + "], [" + maxX + "][" + maxY + "] : " + obj);
 		for(int i=minX; i<=maxX; i++){
 			for(int j=minY; j<=maxY; j++){
 				matrix[i][j].remove(obj);
@@ -77,7 +77,7 @@ public class GroundMatrix {
 		int maxX = getMaxX(x, y, radius);
 		int minY = getMinY(x, y, radius);
 		int maxY = getMaxY(x, y, radius);
-		Tool.info("search object in [" + minX + "][" + minY + "], [" + maxX + "][" + maxY + "]");
+//		Tool.info("search object in [" + minX + "][" + minY + "], [" + maxX + "][" + maxY + "]");
 		for(int i=minX; i<=maxX; i++){
 			for(int j=minY; j<=maxY; j++){
 				resultArrayList.addAll(matrix[i][j]);
