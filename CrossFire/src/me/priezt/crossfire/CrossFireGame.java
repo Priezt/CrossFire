@@ -51,15 +51,6 @@ public class CrossFireGame implements ApplicationListener {
 	private void initInputProcessor(){
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(new InputProcessor(){
-			class Point{
-				public float x;
-				public float y;
-				public Point(float _x, float _y){
-					x = _x;
-					y = _y;
-				}
-			}
-			
 			Point[] touchPoints = new Point[32];
 			
 			@Override

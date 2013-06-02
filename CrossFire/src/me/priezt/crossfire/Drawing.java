@@ -34,6 +34,10 @@ public class Drawing {
 		lineRenderer.line(x1, y1, x2, y2);
 	}
 	
+	public void line(Point p1, Point p2, Color color){
+		line(p1.x, p1.y, p2.x, p2.y, color);
+	}
+	
 	public void circle(float x, float y, float radius, Color color){
 		circleRenderer.setColor(color);
 		circleRenderer.circle(x, y, radius);
