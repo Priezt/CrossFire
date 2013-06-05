@@ -22,6 +22,7 @@ public class BattleGameView extends GameView {
 		if(turret.containsPoint(x, y)) return;
 		float newAngle = 90 - (float)Math.toDegrees(Math.atan2(y - turret.y, x - turret.x));
 		turret.angle = newAngle;
+		turret.showAiming();
 	}
 	
 	@Override
@@ -29,7 +30,10 @@ public class BattleGameView extends GameView {
 //		Tool.info("Click: (" + originX + "," + originY + ") -> (" + x + "," + y + ")");
 		Turret turret = getTouchableTurret(x, y, originX, originY);
 		if(turret == null) return;
-		turret.clicked();
+		turret.hideAiming();
+		if(turret.containsPoint(x, y)){
+			turret.clicked();
+		}
 	}
 	
 	private Turret getTouchableTurret(float x, float y, float originX, float originY){

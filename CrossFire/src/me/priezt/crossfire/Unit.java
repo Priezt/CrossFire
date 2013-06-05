@@ -18,6 +18,10 @@ public abstract class Unit {
 		angle = _angle;
 	}
 	
+	public Point getPointByRadiusAndAngle(float rds, float ang){
+		return new Point((float)(x + rds * Math.sin(Math.toRadians(angle + ang))), (float)(y + rds * Math.cos(Math.toRadians(angle + ang))));
+	}
+	
 	public boolean containsPoint(float px, float py){
 		if(Math.abs(px - x) > radius) return false; 
 		if(Math.abs(py - y) > radius) return false;
@@ -25,7 +29,11 @@ public abstract class Unit {
 		return true;
 	}
 	
-	public static Color getTeamColor(Team t){
+	public Color getTeamColor(){
+		return getColorByTeam(team);
+	}
+	
+	public static Color getColorByTeam(Team t){
 		if(t.equals(Team.RED)){
 			return Color.RED;
 		}else if(t.equals(Team.BLUE)){
