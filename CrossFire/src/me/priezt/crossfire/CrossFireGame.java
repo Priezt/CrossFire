@@ -44,8 +44,8 @@ public class CrossFireGame implements ApplicationListener {
 	private void initTestStuff(){
 		battleground = new Battleground();
 		currentGameView = new BattleGameView(battleground);
-		battleground.addUnit(new Turret(250f, 150f, 90f, Unit.Team.RED));
-		battleground.addUnit(new Turret(400f, 800f, 0, Unit.Team.BLUE));
+		battleground.addUnit(new MachineGun(250f, 150f, 90f, Unit.Team.RED));
+		battleground.addUnit(new MachineGun(400f, 800f, 0, Unit.Team.BLUE));
 	}
 	
 	private void initInputProcessor(){

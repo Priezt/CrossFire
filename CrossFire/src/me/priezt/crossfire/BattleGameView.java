@@ -17,7 +17,7 @@ public class BattleGameView extends GameView {
 	@Override
 	public void touchDragged(float x, float y, float originX, float originY){
 //		Tool.info("Drag: (" + (x - originX) + "," + (y - originY) + ")");
-		Turret turret = getTouchableTurret(x, y, originX, originY);
+		Turret turret = getAimableTurret(x, y, originX, originY);
 		if(turret == null) return;
 		if(turret.containsPoint(x, y)) return;
 		float newAngle = 90 - (float)Math.toDegrees(Math.atan2(y - turret.y, x - turret.x));
@@ -28,7 +28,7 @@ public class BattleGameView extends GameView {
 	@Override
 	public void touchUp(float x, float y, float originX, float originY){
 //		Tool.info("Click: (" + originX + "," + originY + ") -> (" + x + "," + y + ")");
-		Turret turret = getTouchableTurret(x, y, originX, originY);
+		Turret turret = getClickableTurret(x, y, originX, originY);
 		if(turret == null) return;
 		turret.hideAiming();
 		if(turret.containsPoint(x, y)){
@@ -36,12 +36,21 @@ public class BattleGameView extends GameView {
 		}
 	}
 	
-	private Turret getTouchableTurret(float x, float y, float originX, float originY){
+	private Turret getClickableTurret(float x, float y, float originX, float originY){
 		Unit unitAtPoint = battleground.getUnitAtPoint(originX, originY);
 		if(unitAtPoint == null) return null;
-		if(! unitAtPoint.getClass().isAssignableFrom(Turret.class)) return null;
+		if(! Turret.class.isAssignableFrom(unitAtPoint.getClass())) return null;
 		Turret turret = (Turret)unitAtPoint;
-		if(! turret.isTouchable()) return null;
+		if(! turret.isClickable()) return null;
+		return turret;
+	}
+	
+	private Turret getAimableTurret(float x, float y, float originX, float originY){
+		Unit unitAtPoint = battleground.getUnitAtPoint(originX, originY);
+		if(unitAtPoint == null) return null;
+		if(! Turret.class.isAssignableFrom(unitAtPoint.getClass())) return null;
+		Turret turret = (Turret)unitAtPoint;
+		if(! turret.isAimable()) return null;
 		return turret;
 	}
 }

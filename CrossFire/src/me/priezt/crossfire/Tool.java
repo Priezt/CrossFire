@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Tool {
-	public static float ZERO_ANGLE_RANGE = 2f;
+	public static float ZERO_ANGLE_RANGE = 0.5f;
 	
 	public static void info(String msg){
 		Logger.getGlobal().log(Level.INFO, msg);

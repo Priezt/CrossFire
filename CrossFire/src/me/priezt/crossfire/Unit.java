@@ -10,6 +10,7 @@ public abstract class Unit {
 	public float y = 0f;
 	public float radius = 50f;
 	public float angle = 0f;
+	public boolean alive = true;
 	
 	public Unit(float _x, float _y, float _angle, Team _team){
 		team = _team;
@@ -47,4 +48,12 @@ public abstract class Unit {
 	}
 	
 	public abstract void draw(Drawing drawing);
+	
+	public void tick(){
+		
+	}
+	
+	public void destroy(){
+		alive = false;
+	}
 }
