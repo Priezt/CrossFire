@@ -19,14 +19,4 @@ public abstract class AimableTurret extends Turret {
 	public boolean isClickable(){
 		return true;
 	}
-	
-	public abstract void drawBody(Drawing drawing);
-	
-	@Override
-	public void draw(Drawing drawing){
-		drawBody(drawing);
-		drawAiming(drawing);
-	}
-	
-
 }

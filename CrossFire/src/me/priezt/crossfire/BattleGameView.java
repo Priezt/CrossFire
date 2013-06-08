@@ -15,6 +15,11 @@ public class BattleGameView extends GameView {
 	}
 	
 	@Override
+	public void update(){
+		battleground.tick();
+	}
+	
+	@Override
 	public void touchDragged(float x, float y, float originX, float originY){
 //		Tool.info("Drag: (" + (x - originX) + "," + (y - originY) + ")");
 		Turret turret = getAimableTurret(x, y, originX, originY);

@@ -38,6 +38,7 @@ public class CrossFireGame implements ApplicationListener {
 	
 	private void initDrawingStuff(){
 		// left bottom is (0, 0)
+		Gdx.gl10.glLineWidth(3f);
 		drawing = new Drawing();
 	}
 	
@@ -180,7 +181,8 @@ public class CrossFireGame implements ApplicationListener {
 
 	@Override
 	public void render() {
-		Gdx.gl.glClearColor(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
+		update();
+		Gdx.gl.glClearColor(Conf.backgroundColor.r, Conf.backgroundColor.g, Conf.backgroundColor.b, Conf.backgroundColor.a);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		drawing.begin();
@@ -188,6 +190,10 @@ public class CrossFireGame implements ApplicationListener {
 //		drawing.circle(100f, 100f, 50f, Color.BLUE);
 		currentGameView.draw(drawing);
 		drawing.end();
+	}
+	
+	public void update(){
+		currentGameView.update();
 	}
 
 	@Override

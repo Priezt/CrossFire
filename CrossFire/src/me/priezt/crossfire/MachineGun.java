@@ -13,4 +13,13 @@ public class MachineGun extends AimableTurret {
 		drawing.line(getPointByRadiusAndAngle(radius, 10f), getPointByRadiusAndAngle(radius * 1.5f, 0f), getTeamColor());
 		drawing.line(getPointByRadiusAndAngle(radius, -10f), getPointByRadiusAndAngle(radius * 1.5f, 0f), getTeamColor());
 	}
+	
+	@Override
+	public void tick(){
+//		Tool.info("counter: " + battleground.counter);
+		if((battleground.counter % 10 == 0) && powerOn){
+//			Tool.info("fire");
+			fire(new TestBullet(0f, 0f, 0f, team), 0f);
+		}
+	}
 }

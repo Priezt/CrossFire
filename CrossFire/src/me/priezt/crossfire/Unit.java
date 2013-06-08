@@ -4,12 +4,14 @@ import com.badlogic.gdx.graphics.Color;
 
 public abstract class Unit {
 	public static enum Team { RED, BLUE, NEUTRAL, HOSTILE };
+	public static Battleground battleground;
 	
 	public Team team = Team.RED; 
 	public float x = 0f;
 	public float y = 0f;
 	public float radius = 50f;
 	public float angle = 0f;
+	public float hitpoint = 100f;
 	public boolean alive = true;
 	
 	public Unit(float _x, float _y, float _angle, Team _team){
@@ -55,5 +57,27 @@ public abstract class Unit {
 	
 	public void destroy(){
 		alive = false;
+	}
+	
+	public float xpart(){
+		return (float)Math.sin(Math.toRadians(angle));
+	}
+	
+	public float ypart(){
+		return (float)Math.cos(Math.toRadians(angle));
+	}
+	
+	public boolean isHittable(Unit targetUnit){
+		if(team == Team.NEUTRAL || targetUnit.team == Team.NEUTRAL) return false;
+		if(team == Team.HOSTILE|| targetUnit.team == Team.HOSTILE) return true;
+		if(team == targetUnit.team) return false;
+		return true;
+	}
+	
+	public void takeDamage(float damage){
+		hitpoint -= damage;
+		if(hitpoint <= 0){
+			destroy();
+		}
 	}
 }
