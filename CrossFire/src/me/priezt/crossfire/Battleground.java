@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Battleground {
 	public ArrayList<Unit> units;
+	public ArrayList<Effect> effects;
 	public GroundMatrix groundMatrix;
 	public int counter = 0;
 	
@@ -11,6 +12,20 @@ public class Battleground {
 		counter++;
 		checkDeadUnit();
 		unitTick();
+		effectTick();
+		testStuff();
+	}
+	
+	public void testStuff(){
+//		if(counter % 50 == 0){
+//			new DestroyEffect(500f, 500f).action();
+//		}
+	}
+	
+	public void effectTick(){
+		for(Effect effect : (ArrayList<Effect>)(effects.clone())){
+			effect.tick();
+		}
 	}
 	
 	public void checkDeadUnit(){
@@ -37,8 +52,10 @@ public class Battleground {
 	
 	public Battleground(){
 		units = new ArrayList<Unit>();
+		effects = new ArrayList<Effect>();
 		groundMatrix = new GroundMatrix(Conf.screenWidth, Conf.screenHeight);
 		Unit.battleground = this;
+		Effect.battleground = this;
 	}
 	
 	public void addUnit(Unit unit){
@@ -68,5 +85,13 @@ public class Battleground {
 			}
 		}
 		return null;
+	}
+	
+	public ArrayList<Unit> getUnitsInRange(float x, float y, float radius){
+		ArrayList<Unit> result = new ArrayList<Unit>();
+		for(Unit unit : (ArrayList<Unit>)(groundMatrix.getObjectsInRange(x, y, radius))){
+			throw new UnsupportedOperationException();
+		}
+		return result;
 	}
 }

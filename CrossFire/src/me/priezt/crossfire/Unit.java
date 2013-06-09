@@ -1,5 +1,7 @@
 package me.priezt.crossfire;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Color;
 
 public abstract class Unit {
@@ -56,6 +58,7 @@ public abstract class Unit {
 	}
 	
 	public void destroy(){
+		onDestroy();
 		alive = false;
 	}
 	
@@ -79,5 +82,27 @@ public abstract class Unit {
 		if(hitpoint <= 0){
 			destroy();
 		}
+	}
+	
+	public void onDestroy(){}
+	
+	public ArrayList<Bullet> getBulletsInRange(float rds){
+		ArrayList<Bullet> result = new ArrayList<Bullet>();
+		for(Unit unit : battleground.getUnitsInRange(x, y, rds)){
+			if(Bullet.class.isAssignableFrom(unit.getClass())){
+				result.add((Bullet)unit);
+			}
+		}
+		return result;
+	}
+	
+	public ArrayList<Turret> getTurretsInRange(float rds){
+		ArrayList<Turret> result = new ArrayList<Turret>();
+		for(Unit unit : battleground.getUnitsInRange(x, y, rds)){
+			if(Turret.class.isAssignableFrom(unit.getClass())){
+				result.add((Turret)unit);
+			}
+		}
+		return result;
 	}
 }

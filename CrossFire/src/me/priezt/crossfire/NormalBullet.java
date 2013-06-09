@@ -1,8 +1,8 @@
 package me.priezt.crossfire;
 
-public class TestBullet extends Bullet {
+public class NormalBullet extends Bullet {
 
-	public TestBullet(float _x, float _y, float _angle, Team _team) {
+	public NormalBullet(){
 		super();
 		setSpeed(10f);
 		radius = 5f;
@@ -10,7 +10,8 @@ public class TestBullet extends Bullet {
 
 	@Override
 	public void draw(Drawing drawing) {
-//		drawing.circle(x, y, radius, getTeamColor());
+		// TODO Auto-generated method stub
 		drawing.line(this.getPointByRadiusAndAngle(radius, 0f), this.getPointByRadiusAndAngle(radius, 180f), getTeamColor());
 	}
+
 }

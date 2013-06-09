@@ -19,8 +19,6 @@ import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 
 public class CrossFireGame implements ApplicationListener {
-	private final static String TAG = CrossFireGame.class.getSimpleName();
-	
 	private OrthographicCamera camera;
 	private ShapeRenderer shapeRenderer;
 	private ShapeRenderer shapeRenderer2;
@@ -45,8 +43,10 @@ public class CrossFireGame implements ApplicationListener {
 	private void initTestStuff(){
 		battleground = new Battleground();
 		currentGameView = new BattleGameView(battleground);
-		battleground.addUnit(new MachineGun(250f, 150f, 90f, Unit.Team.RED));
+		battleground.addUnit(new MachineGun(250f, 150f, 0f, Unit.Team.RED));
+		battleground.addUnit(new SlowDown(400f, 400f, 0, Unit.Team.RED));
 		battleground.addUnit(new MachineGun(400f, 800f, 0, Unit.Team.BLUE));
+		battleground.addUnit(new Cerberus(200f, 800f, 0, Unit.Team.BLUE));
 	}
 	
 	private void initInputProcessor(){
@@ -185,11 +185,14 @@ public class CrossFireGame implements ApplicationListener {
 		Gdx.gl.glClearColor(Conf.backgroundColor.r, Conf.backgroundColor.g, Conf.backgroundColor.b, Conf.backgroundColor.a);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
+		Gdx.gl.glEnable(GL10.GL_BLEND);
+		Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 		drawing.begin();
 //		drawing.line(0f, 0f, Conf.screenWidth, Conf.screenHeight, Color.RED);
 //		drawing.circle(100f, 100f, 50f, Color.BLUE);
 		currentGameView.draw(drawing);
 		drawing.end();
+		Gdx.gl.glDisable(GL10.GL_BLEND);
 	}
 	
 	public void update(){

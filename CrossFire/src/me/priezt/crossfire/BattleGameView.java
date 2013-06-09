@@ -12,6 +12,9 @@ public class BattleGameView extends GameView {
 		for(Unit unit : battleground.units){
 			unit.draw(drawing);
 		}
+		for(Effect effect : battleground.effects){
+			effect.draw(drawing);
+		}
 	}
 	
 	@Override

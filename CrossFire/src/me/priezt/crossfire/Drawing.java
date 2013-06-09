@@ -9,24 +9,29 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 public class Drawing {
 	private ShapeRenderer lineRenderer;
 	private ShapeRenderer circleRenderer;
+	private ShapeRenderer fillCircleRenderer;
 	private ArrayList<ShapeRenderer> renderers;
 	
 	public Drawing(){
 		lineRenderer = new ShapeRenderer();
 		circleRenderer = new ShapeRenderer();
+		fillCircleRenderer = new ShapeRenderer();
 		renderers = new ArrayList<ShapeRenderer>();
 		renderers.add(lineRenderer);
 		renderers.add(circleRenderer);
+		renderers.add(fillCircleRenderer);
 	}
 	
 	public void begin(){
 		lineRenderer.begin(ShapeType.Line);
 		circleRenderer.begin(ShapeType.Circle);
+		fillCircleRenderer.begin(ShapeType.FilledCircle);
 	}
 	
 	public void end(){
 		lineRenderer.end();
 		circleRenderer.end();
+		fillCircleRenderer.end();
 	}
 	
 	public void line(float x1, float y1, float x2, float y2, Color color){
@@ -41,5 +46,10 @@ public class Drawing {
 	public void circle(float x, float y, float radius, Color color){
 		circleRenderer.setColor(color);
 		circleRenderer.circle(x, y, radius);
+	}
+	
+	public void fillCircle(float x, float y, float radius, Color color){
+		fillCircleRenderer.setColor(color);
+		fillCircleRenderer.filledCircle(x, y, radius);
 	}
 }

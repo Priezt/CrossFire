@@ -19,7 +19,7 @@ public class MachineGun extends AimableTurret {
 //		Tool.info("counter: " + battleground.counter);
 		if((battleground.counter % 10 == 0) && powerOn){
 //			Tool.info("fire");
-			fire(new TestBullet(0f, 0f, 0f, team), 0f);
+			fire(new NormalBullet(), 0f);
 		}
 	}
 }

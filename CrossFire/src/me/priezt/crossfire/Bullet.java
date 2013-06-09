@@ -6,8 +6,8 @@ public abstract class Bullet extends Unit {
 	public float speed = 0f;
 	public float hitDamage = 2f;
 	
-	public Bullet(float _x, float _y, float _angle, Team _team) {
-		super(_x, _y, _angle, _team);
+	public Bullet(){
+		super(0f, 0f, 0f, Team.NEUTRAL);
 		radius = 10f;
 		hitpoint = 5f;
 	}
@@ -33,6 +33,7 @@ public abstract class Bullet extends Unit {
 		if(! isHittable(targetUnit)) return false;
 		causeDamage(targetUnit, hitDamage);
 		destroy();
+		new HitEffect(x, y).action();
 		return true;
 	}
 	

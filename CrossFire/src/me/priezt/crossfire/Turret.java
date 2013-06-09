@@ -47,6 +47,7 @@ public abstract class Turret extends Unit {
 		bullet.x = bulletSpawnPoint.x;
 		bullet.y = bulletSpawnPoint.y;
 		bullet.setAngle(absoluteAngle);
+		bullet.team = team;
 		battleground.addUnit(bullet);
 	}
 	
@@ -70,6 +71,12 @@ public abstract class Turret extends Unit {
 	
 	public void drawHitpoint(Drawing drawing){
 		float hitBarHalfLength = radius * hitpoint / 100f;
-		drawing.line(x - hitBarHalfLength, y, x + hitBarHalfLength, y, Color.GREEN);
+		drawing.line(getPointByRadiusAndAngle(hitBarHalfLength, 90f), getPointByRadiusAndAngle(hitBarHalfLength, -90f), Color.GREEN);
+	}
+	
+	@Override
+	public void onDestroy(){
+//		Tool.info("turret destroy");
+		new DestroyEffect(x, y).action();
 	}
 }
