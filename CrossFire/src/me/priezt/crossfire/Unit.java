@@ -86,16 +86,6 @@ public abstract class Unit {
 	
 	public void onDestroy(){}
 	
-	public ArrayList<Bullet> getBulletsInRange(float rds){
-		ArrayList<Bullet> result = new ArrayList<Bullet>();
-		for(Unit unit : battleground.getUnitsInRange(x, y, rds)){
-			if(Bullet.class.isAssignableFrom(unit.getClass())){
-				result.add((Bullet)unit);
-			}
-		}
-		return result;
-	}
-	
 	public ArrayList<Turret> getTurretsInRange(float rds){
 		ArrayList<Turret> result = new ArrayList<Turret>();
 		for(Unit unit : battleground.getUnitsInRange(x, y, rds)){
@@ -105,4 +95,25 @@ public abstract class Unit {
 		}
 		return result;
 	}
+	
+	public ArrayList<Unit> enemyOnly(ArrayList<Unit> units){
+		ArrayList<Unit> result = new ArrayList<Unit>();
+		for(Unit unit : units){
+			if(unit.team == Team.NEUTRAL) continue;
+			if(unit.team == Team.HOSTILE) result.add(unit);
+			if(unit.team != team) result.add(unit);
+		}
+		return result;
+	}
+	
+	public ArrayList<Bullet> bulletOnly(ArrayList<Unit> units){
+		ArrayList<Bullet> result = new ArrayList<Bullet>();
+		for(Unit unit : units){
+			if(Bullet.class.isAssignableFrom(unit.getClass())){
+				result.add((Bullet)unit);
+			}
+		}
+		return result;
+	}
+	
 }

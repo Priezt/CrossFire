@@ -1,5 +1,7 @@
 package me.priezt.crossfire;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Color;
 
 public class SlowDown extends Turret {
@@ -18,5 +20,22 @@ public class SlowDown extends Turret {
 		drawing.circle(x, y, radius, getTeamColor());
 		drawing.line(getPointByRadiusAndAngle(radius, -60f), getPointByRadiusAndAngle(radius, 60f), getTeamColor());
 		drawing.line(getPointByRadiusAndAngle(radius, -120f), getPointByRadiusAndAngle(radius, 120f), getTeamColor());
+	}
+	
+	@Override
+	public void tick(){
+		if(battleground.getUnitsInRangeExcept(x, y, SLOW_RADIUS, this).size() > 0){
+			Tool.info("here3");
+		}
+		for(Bullet bullet : this.bulletOnly(this.enemyOnly(battleground.getUnitsInRange(x, y, SLOW_RADIUS)))){
+			Tool.info("here2");
+			bullet.moveFilter.add(new MoveFilter(){
+				@Override
+				public Point filter(Point targetPoint, Bullet bullet) {
+					Tool.info("here");
+					return new Point(targetPoint.x + 1, targetPoint.y);
+				}
+			});
+		}
 	}
 }

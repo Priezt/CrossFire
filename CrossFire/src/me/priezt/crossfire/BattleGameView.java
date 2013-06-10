@@ -45,7 +45,7 @@ public class BattleGameView extends GameView {
 	}
 	
 	private Turret getClickableTurret(float x, float y, float originX, float originY){
-		Unit unitAtPoint = battleground.getUnitAtPoint(originX, originY);
+		Unit unitAtPoint = battleground.getSomeUnitAtPoint(originX, originY);
 		if(unitAtPoint == null) return null;
 		if(! Turret.class.isAssignableFrom(unitAtPoint.getClass())) return null;
 		Turret turret = (Turret)unitAtPoint;
@@ -54,7 +54,7 @@ public class BattleGameView extends GameView {
 	}
 	
 	private Turret getAimableTurret(float x, float y, float originX, float originY){
-		Unit unitAtPoint = battleground.getUnitAtPoint(originX, originY);
+		Unit unitAtPoint = battleground.getSomeUnitAtPoint(originX, originY);
 		if(unitAtPoint == null) return null;
 		if(! Turret.class.isAssignableFrom(unitAtPoint.getClass())) return null;
 		Turret turret = (Turret)unitAtPoint;

@@ -1,10 +1,15 @@
 package me.priezt.crossfire;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class Bullet extends Unit {
 	public float vx = 0f;
 	public float vy = 0f;
 	public float speed = 0f;
 	public float hitDamage = 2f;
+	
+	public HashSet<MoveFilter> moveFilter = new HashSet<MoveFilter>();
 	
 	public Bullet(){
 		super(0f, 0f, 0f, Team.NEUTRAL);
@@ -23,12 +28,15 @@ public abstract class Bullet extends Unit {
 	}
 	
 	public void doMove(){
-		x += vx;
-		y += vy;
+		Point tp = new Point(x + vx, y + vy);
+		for(MoveFilter mf : moveFilter)	tp= mf.filter(tp, this);
+		moveFilter = new HashSet<MoveFilter>();
+		x = tp.x;
+		y = tp.y;
 	}
 	
 	public boolean checkCollision(){
-		Unit targetUnit = battleground.getUnitAtPoint(x, y);
+		Unit targetUnit = battleground.getSomeUnitAtPointExcept(x, y, this);
 		if(targetUnit == null) return false;
 		if(! isHittable(targetUnit)) return false;
 		causeDamage(targetUnit, hitDamage);
