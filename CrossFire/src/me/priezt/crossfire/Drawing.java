@@ -10,28 +10,33 @@ public class Drawing {
 	private ShapeRenderer lineRenderer;
 	private ShapeRenderer circleRenderer;
 	private ShapeRenderer fillCircleRenderer;
+	private ShapeRenderer fillRectRenderer;
 	private ArrayList<ShapeRenderer> renderers;
 	
 	public Drawing(){
 		lineRenderer = new ShapeRenderer();
 		circleRenderer = new ShapeRenderer();
 		fillCircleRenderer = new ShapeRenderer();
+		fillRectRenderer = new ShapeRenderer();
 		renderers = new ArrayList<ShapeRenderer>();
 		renderers.add(lineRenderer);
 		renderers.add(circleRenderer);
 		renderers.add(fillCircleRenderer);
+		renderers.add(fillRectRenderer);
 	}
 	
 	public void begin(){
 		lineRenderer.begin(ShapeType.Line);
 		circleRenderer.begin(ShapeType.Circle);
 		fillCircleRenderer.begin(ShapeType.FilledCircle);
+		fillRectRenderer.begin(ShapeType.FilledRectangle);
 	}
 	
 	public void end(){
 		lineRenderer.end();
 		circleRenderer.end();
 		fillCircleRenderer.end();
+		fillRectRenderer.end();
 	}
 	
 	public void line(float x1, float y1, float x2, float y2, Color color){
@@ -51,5 +56,10 @@ public class Drawing {
 	public void fillCircle(float x, float y, float radius, Color color){
 		fillCircleRenderer.setColor(color);
 		fillCircleRenderer.filledCircle(x, y, radius);
+	}
+	
+	public void fillRect(float x, float y, float width, float height, Color color){
+		fillRectRenderer.setColor(color);
+		fillRectRenderer.filledRect(x, y, width, height);
 	}
 }

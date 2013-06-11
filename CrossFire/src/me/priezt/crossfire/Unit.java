@@ -8,6 +8,8 @@ public abstract class Unit {
 	public static enum Team { RED, BLUE, NEUTRAL, HOSTILE };
 	public static Battleground battleground;
 	
+	public static float BULLET_FIRE_DISTANCE = 5f;
+	
 	public Team team = Team.RED; 
 	public float x = 0f;
 	public float y = 0f;
@@ -116,4 +118,29 @@ public abstract class Unit {
 		return result;
 	}
 	
+	public void fire(Bullet bullet, float relativeAngle){
+		float absoluteAngle = angle + relativeAngle;
+		Point bulletSpawnPoint = this.getPointByRadiusAndAngle(radius + bullet.radius + BULLET_FIRE_DISTANCE, relativeAngle);
+		bullet.x = bulletSpawnPoint.x;
+		bullet.y = bulletSpawnPoint.y;
+		bullet.setAngle(absoluteAngle);
+		bullet.team = team;
+		battleground.addUnit(bullet);
+	}
+	
+	public boolean cost(float costValue){
+		if(battleground.getOverloaded(team)){
+			return false;
+		}
+		float energy = battleground.getEnergy(team);
+		if(energy < costValue){
+			return false;
+		}
+		float newEnergy = energy - costValue;
+		battleground.setEnergy(team, newEnergy);
+		if(newEnergy <= Conf.ENERGY_OVERLOAD){
+			battleground.setOverloaded(team, true);
+		}
+		return true;
+	}
 }

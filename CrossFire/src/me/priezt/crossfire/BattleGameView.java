@@ -1,7 +1,11 @@
 package me.priezt.crossfire;
 
+import me.priezt.crossfire.Unit.Team;
+
 public class BattleGameView extends GameView {
 	private Battleground battleground;
+	
+
 	
 	public BattleGameView(Battleground bg){
 		battleground = bg;
@@ -9,13 +13,17 @@ public class BattleGameView extends GameView {
 	
 	@Override
 	public void draw(Drawing drawing) {
+		battleground.drawCenterSplitLine(drawing);
 		for(Unit unit : battleground.units){
 			unit.draw(drawing);
 		}
 		for(Effect effect : battleground.effects){
 			effect.draw(drawing);
 		}
+		battleground.drawEnergyBar(drawing);
 	}
+	
+
 	
 	@Override
 	public void update(){

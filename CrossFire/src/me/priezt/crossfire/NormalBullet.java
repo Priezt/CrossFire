@@ -6,6 +6,7 @@ public class NormalBullet extends Bullet {
 		super();
 		setSpeed(10f);
 		radius = 5f;
+		hitDamage = 2f;
 	}
 
 	@Override

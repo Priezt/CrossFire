@@ -5,9 +5,15 @@ import com.badlogic.gdx.graphics.Color;
 public abstract class Turret extends Unit {
 	public boolean isAiming = false;
 	public static Color AIMING_COLOR = Color.YELLOW;
-	public static float BULLET_FIRE_DISTANCE = 5f;
+	public static float POWER_OFF_ALPHA = 0.15f;
+	public static float AURA_ALPHA = 0.05f;
 	
 	public boolean powerOn = false;
+	public float actionCost = 0f;
+	
+	public boolean cost(){
+		return super.cost(actionCost);
+	}
 	
 	public boolean isClickable(){
 		return false;
@@ -41,16 +47,7 @@ public abstract class Turret extends Unit {
 		}
 	}
 	
-	public void fire(Bullet bullet, float relativeAngle){
-		float absoluteAngle = angle + relativeAngle;
-		Point bulletSpawnPoint = this.getPointByRadiusAndAngle(radius + bullet.radius + BULLET_FIRE_DISTANCE, relativeAngle);
-		bullet.x = bulletSpawnPoint.x;
-		bullet.y = bulletSpawnPoint.y;
-		bullet.setAngle(absoluteAngle);
-		bullet.team = team;
-		battleground.addUnit(bullet);
-	}
-	
+
 	public void toggle(){
 		powerOn = !powerOn;
 		if(powerOn){
@@ -78,5 +75,20 @@ public abstract class Turret extends Unit {
 	public void onDestroy(){
 //		Tool.info("turret destroy");
 		new DestroyEffect(x, y).action();
+	}
+	
+	@Override
+	public Color getTeamColor(){
+		Color color = super.getTeamColor().cpy();
+		if(!powerOn){
+			color.set(color.r, color.g, color.b, POWER_OFF_ALPHA);
+		}
+		return color;
+	}
+	
+	public Color getAuraColor(){
+		Color color = super.getTeamColor().cpy();
+		color.set(color.r, color.g, color.b, AURA_ALPHA);
+		return color;
 	}
 }

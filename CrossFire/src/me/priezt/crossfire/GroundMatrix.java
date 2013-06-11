@@ -1,6 +1,8 @@
 package me.priezt.crossfire;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class GroundMatrix {
 	public static float GRID_WIDTH = 50f;
@@ -73,6 +75,7 @@ public class GroundMatrix {
 	
 	public ArrayList getObjectsInRange(float x, float y, float radius){
 		ArrayList resultArrayList = new ArrayList();
+		HashSet resultHashSet = new HashSet();
 		int minX = getMinX(x, y, radius);
 		int maxX = getMaxX(x, y, radius);
 		int minY = getMinY(x, y, radius);
@@ -80,8 +83,11 @@ public class GroundMatrix {
 //		Tool.info("search object in [" + minX + "][" + minY + "], [" + maxX + "][" + maxY + "]");
 		for(int i=minX; i<=maxX; i++){
 			for(int j=minY; j<=maxY; j++){
-				resultArrayList.addAll(matrix[i][j]);
+				resultHashSet.addAll(matrix[i][j]);
 			}
+		}
+		for(Object obj : resultHashSet){
+			resultArrayList.add(obj);
 		}
 		return resultArrayList;
 	}

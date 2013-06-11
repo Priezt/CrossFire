@@ -3,6 +3,8 @@ package me.priezt.crossfire;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import me.priezt.crossfire.Unit.Team;
+
 public class Tool {
 	public static float ZERO_ANGLE_RANGE = 0.5f;
 	
@@ -52,6 +54,23 @@ public class Tool {
 			}
 		}
 		Tool.info("get intersection point: impossible situation");
+		return null;
+	}
+	
+	public static float getAngle(float xd, float yd){
+		float ang = (float)Math.toDegrees(Math.atan2(yd, xd));
+		return 90f - ang;
+	}
+	
+	// Point: (-1, -1) : (1, 1)
+	public static Point getAbsolutePointByRelatedPoint(float rx, float ry, Unit.Team team){
+		float x = Conf.screenWidth * 0.5f * (1 + rx);
+		float y = Conf.screenHeight * 0.25f * (1 + ry);
+		if(team == Team.RED){
+			return new Point(x, y);
+		}else if(team == Team.BLUE){
+			return new Point(Conf.screenWidth - x, Conf.screenHeight - y);
+		}
 		return null;
 	}
 }

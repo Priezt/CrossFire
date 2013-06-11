@@ -36,17 +36,20 @@ public class CrossFireGame implements ApplicationListener {
 	
 	private void initDrawingStuff(){
 		// left bottom is (0, 0)
-		Gdx.gl10.glLineWidth(3f);
+		Gdx.gl10.glLineWidth(Conf.LINE_WIDTH);
 		drawing = new Drawing();
 	}
 	
 	private void initTestStuff(){
 		battleground = new Battleground();
 		currentGameView = new BattleGameView(battleground);
-		battleground.addUnit(new MachineGun(250f, 150f, 0f, Unit.Team.RED));
-		battleground.addUnit(new SlowDown(400f, 400f, 0, Unit.Team.RED));
-		battleground.addUnit(new MachineGun(400f, 800f, 0, Unit.Team.BLUE));
-		battleground.addUnit(new Cerberus(200f, 800f, 0, Unit.Team.BLUE));
+		battleground.addUnit(new MachineGun(0, 0, 0, Unit.Team.RED), -0.5f, -0.5f);
+		battleground.addUnit(new RocketLauncher(0, 0, 0, Unit.Team.RED), 0.5f, -0.5f);
+		battleground.addUnit(new SlowDown(0, 0, 0, Unit.Team.RED), 0f, 0.5f);
+		
+		battleground.addUnit(new MachineGun(0, 0, 0, Unit.Team.BLUE), -0.5f, -0.5f);
+		battleground.addUnit(new Cerberus(0, 0, 0, Unit.Team.BLUE), 0.5f, -0.5f);
+		battleground.addUnit(new Jammer(0, 0, 0, Unit.Team.BLUE), 0f, 0.5f);
 	}
 	
 	private void initInputProcessor(){

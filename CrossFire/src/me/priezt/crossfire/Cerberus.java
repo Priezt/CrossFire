@@ -4,7 +4,8 @@ public class Cerberus extends AimableTurret {
 
 	public Cerberus(float _x, float _y, float _angle, Team _team) {
 		super(_x, _y, _angle, _team);
-		// TODO Auto-generated constructor stub
+		radius = 40f;
+		actionCost = 4f;
 	}
 
 	@Override
@@ -21,9 +22,11 @@ public class Cerberus extends AimableTurret {
 	@Override
 	public void tick(){
 		if((battleground.counter % 10 == 0) && powerOn){
-			fire(new NormalBullet(), 0f);
-			fire(new NormalBullet(), 20f);
-			fire(new NormalBullet(), -20f);
+			if(cost()){
+				fire(new NormalBullet(), 0f);
+				fire(new NormalBullet(), 20f);
+				fire(new NormalBullet(), -20f);
+			}
 		}
 	}
 }

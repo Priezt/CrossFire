@@ -4,7 +4,8 @@ public class MachineGun extends AimableTurret {
 
 	public MachineGun(float _x, float _y, float _angle, Team _team) {
 		super(_x, _y, _angle, _team);
-		// TODO Auto-generated constructor stub
+		radius = 30f;
+		actionCost = 2f;
 	}
 	
 	@Override
@@ -16,10 +17,8 @@ public class MachineGun extends AimableTurret {
 	
 	@Override
 	public void tick(){
-//		Tool.info("counter: " + battleground.counter);
 		if((battleground.counter % 10 == 0) && powerOn){
-//			Tool.info("fire");
-			fire(new NormalBullet(), 0f);
+			if(cost()) fire(new NormalBullet(), 0f);
 		}
 	}
 }

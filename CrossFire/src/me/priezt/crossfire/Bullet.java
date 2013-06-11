@@ -10,6 +10,7 @@ public abstract class Bullet extends Unit {
 	public float hitDamage = 2f;
 	
 	public HashSet<MoveFilter> moveFilter = new HashSet<MoveFilter>();
+	public HashSet<TurnFilter> turnFilter = new HashSet<TurnFilter>();
 	
 	public Bullet(){
 		super(0f, 0f, 0f, Team.NEUTRAL);
@@ -23,16 +24,29 @@ public abstract class Bullet extends Unit {
 	@Override
 	public void tick(){
 		doMove();
+		doTurn();
 		if(checkOutsideBoard()) return;
 		if(checkCollision()) return;
+	}
+	
+	public void doTurn(){
+		float ta = angle;
+		for(TurnFilter tf : turnFilter) ta = tf.filter(ta, this);
+		setAngle(ta);
 	}
 	
 	public void doMove(){
 		Point tp = new Point(x + vx, y + vy);
 		for(MoveFilter mf : moveFilter)	tp= mf.filter(tp, this);
 		moveFilter = new HashSet<MoveFilter>();
-		x = tp.x;
-		y = tp.y;
+		move(tp.x, tp.y);
+	}
+	
+	public void move(float tx, float ty){
+		battleground.groundMatrix.remove(this, x, y, radius);
+		x = tx;
+		y = ty;
+		battleground.groundMatrix.add(this, x, y, radius);
 	}
 	
 	public boolean checkCollision(){
