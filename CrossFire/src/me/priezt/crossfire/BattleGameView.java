@@ -5,10 +5,19 @@ import me.priezt.crossfire.Unit.Team;
 public class BattleGameView extends GameView {
 	private Battleground battleground;
 	
-
+	public void testInit(){
+		battleground.addUnit(new MachineGun(0, 0, 0, Unit.Team.RED), -0.5f, -0.5f);
+		battleground.addUnit(new RocketLauncher(0, 0, 0, Unit.Team.RED), 0.5f, -0.5f);
+		battleground.addUnit(new SlowDown(0, 0, 0, Unit.Team.RED), 0f, 0.5f);
+		
+		battleground.addUnit(new MachineGun(0, 0, 0, Unit.Team.BLUE), -0.5f, -0.5f);
+		battleground.addUnit(new Cerberus(0, 0, 0, Unit.Team.BLUE), 0.5f, -0.5f);
+		battleground.addUnit(new Jammer(0, 0, 0, Unit.Team.BLUE), 0f, 0.5f);
+	}
 	
-	public BattleGameView(Battleground bg){
-		battleground = bg;
+	public BattleGameView(){
+		battleground = new Battleground();
+		testInit();
 	}
 	
 	@Override
