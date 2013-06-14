@@ -8,6 +8,7 @@ public abstract class Bullet extends Unit {
 	public float vy = 0f;
 	public float speed = 0f;
 	public float hitDamage = 2f;
+	public float weight = 1f;
 	
 	public HashSet<MoveFilter> moveFilter = new HashSet<MoveFilter>();
 	public HashSet<TurnFilter> turnFilter = new HashSet<TurnFilter>();

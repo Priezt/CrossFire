@@ -7,6 +7,7 @@ public class Rocket extends Bullet {
 		radius = 15f;
 		hitDamage = 20f;
 		hitpoint = 30f;
+		weight = 3f;
 	}
 	
 	@Override

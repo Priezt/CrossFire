@@ -5,6 +5,7 @@ public class RocketLauncher extends AimableTurret {
 	public RocketLauncher(float _x, float _y, float _angle, Team _team) {
 		super(_x, _y, _angle, _team);
 		radius = 50f;
+		actionCost = 8f;
 	}
 
 	@Override
@@ -18,7 +19,7 @@ public class RocketLauncher extends AimableTurret {
 	@Override
 	public void tick(){
 		if((battleground.counter % 80 == 0) && powerOn){
-			fire(new Rocket(), 0f);
+			if(cost()) fire(new Rocket(), 0f);
 		}
 	}
 }

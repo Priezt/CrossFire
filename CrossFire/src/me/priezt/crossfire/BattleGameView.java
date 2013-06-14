@@ -13,6 +13,7 @@ public class BattleGameView extends GameView {
 		battleground.addUnit(new MachineGun(0, 0, 0, Unit.Team.BLUE), -0.5f, -0.5f);
 		battleground.addUnit(new Cerberus(0, 0, 0, Unit.Team.BLUE), 0.5f, -0.5f);
 		battleground.addUnit(new Jammer(0, 0, 0, Unit.Team.BLUE), 0f, 0.5f);
+		battleground.addUnit(new SlowDown(0, 0, 0, Unit.Team.BLUE), -0.5f, 0f);
 	}
 	
 	public BattleGameView(){

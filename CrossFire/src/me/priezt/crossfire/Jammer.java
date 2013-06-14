@@ -43,8 +43,9 @@ public class Jammer extends Turret {
 					ang = ang % 360;
 					if(ang < 0) ang += 360;
 					float resultAngle = bullet.angle;
-					if(ang >= 0 && ang <= 90f) resultAngle = targetAngle + JAMMER_ANGLE;
-					if(ang >= 270f && ang < 360f) resultAngle = targetAngle - JAMMER_ANGLE;
+					float realJammerAngle = JAMMER_ANGLE / bullet.weight;
+					if(ang >= 0 && ang <= 90f) resultAngle = targetAngle + realJammerAngle;
+					if(ang >= 270f && ang < 360f) resultAngle = targetAngle - realJammerAngle;
 					return resultAngle;
 				}
 			});

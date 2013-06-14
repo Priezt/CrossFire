@@ -163,8 +163,7 @@ public class CrossFireGame implements ApplicationListener {
 		initDrawingStuff();
 		initInputProcessor();
 		camera = new OrthographicCamera(1, Conf.screenHeight/Conf.screenWidth);
-//		currentGameView = new BattleGameView();
-		currentGameView = new StartGameView();
+		currentGameView = new BattleGameView();
 	}
 
 	@Override

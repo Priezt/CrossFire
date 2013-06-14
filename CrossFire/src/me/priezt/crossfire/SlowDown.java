@@ -40,7 +40,8 @@ public class SlowDown extends Turret {
 			bullet.moveFilter.add(new MoveFilter(){
 				@Override
 				public Point filter(Point targetPoint, Bullet bullet) {
-					return new Point(targetPoint.x * SLOW_RATE + bullet.x * (1 - SLOW_RATE), targetPoint.y * SLOW_RATE + bullet.y * (1 - SLOW_RATE));
+					float realSlowRate = 1 - (1 - SLOW_RATE) / bullet.weight; 
+					return new Point(targetPoint.x * realSlowRate+ bullet.x * (1 - realSlowRate), targetPoint.y * realSlowRate + bullet.y * (1 - realSlowRate));
 				}
 			});
 		}
